@@ -8,7 +8,6 @@ export class User {
   id: number;
 
   @Column({
-    default: '',
     nullable: false,
   })
   password: string;
@@ -19,22 +18,19 @@ export class User {
   dob: Date;
 
   @Column({
-    default: '',
     nullable: false,
   })
   citizenId: string;
 
   @Column({
-    default: '',
     nullable: false,
   })
   phone_number: string;
 
   @Column({
-    default: '',
     nullable: false,
   })
-  gender: string;
+  gender: number;
 
   @Column({
     default: '',

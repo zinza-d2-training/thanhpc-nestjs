@@ -18,7 +18,7 @@ export class CreateUserDto {
   phone_number: string;
 
   @IsNotEmpty()
-  gender: string;
+  gender: number;
 
   @IsNotEmpty()
   full_name: string;

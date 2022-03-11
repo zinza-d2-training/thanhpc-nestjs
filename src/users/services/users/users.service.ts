@@ -2,13 +2,13 @@ import { User as UserEntity } from 'src/typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
-import { CreateUserDto } from 'src/user/dto/CreateUser.dto';
+import { CreateUserDto } from 'src/users/dto/CreateUser.dto';
 
-import { SerializedUser, User } from 'src/user/types';
+import { SerializedUser, User } from 'src/users/types';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
