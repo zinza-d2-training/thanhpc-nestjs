@@ -5,7 +5,7 @@ export interface User {
   dob: Date;
   citizenId: string;
   phone_number: string;
-  gender: string;
+  gender: number;
   address: string;
   full_name: string;
 }
@@ -14,7 +14,7 @@ export class SerializedUser {
   dob: Date;
   citizenId: string;
   phone_number: string;
-  gender: string;
+  gender: number;
   address: string;
   full_name: string;
 
