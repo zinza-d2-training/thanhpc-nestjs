@@ -33,13 +33,11 @@ export class User {
   gender: number;
 
   @Column({
-    default: '',
     nullable: false,
   })
   address: string;
 
   @Column({
-    default: '',
     nullable: true,
   })
   full_name: string;

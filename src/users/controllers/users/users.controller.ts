@@ -23,7 +23,6 @@ export class UsersController {
   @Get('')
   @UseInterceptors(ClassSerializerInterceptor)
   async getUsers(): Promise<User[]> {
-    console.log(await this.userService.getUsers()); // password is showed to hash
     return await this.userService.getUsers();
   }
   @Post('create')
