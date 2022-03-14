@@ -10,7 +10,7 @@ import { TypeormModule } from './typeorm/typeorm.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.example',
+      isGlobal: true,
     }),
     TypeormModule.forRoot(),
     ConsoleModule,

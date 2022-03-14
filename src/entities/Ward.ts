@@ -16,16 +16,11 @@ export class Ward {
   })
   id: number;
 
-  @Column({
-    type: 'int',
-  })
-  wardId: number;
-
   @Column({ name: 'name', type: 'varchar' })
   name: string;
 
-  @Column({ name: 'district_id', type: 'varchar' })
-  districtId: number;
+  @Column({ name: 'district_id', type: 'int' })
+  district_id: number;
 
   @ManyToOne(() => District, (district) => district.wards)
   @JoinColumn({ name: 'district_id' })

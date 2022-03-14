@@ -14,20 +14,15 @@ import { Ward } from './Ward';
 @Entity('districts')
 export class District {
   @PrimaryGeneratedColumn({
-    type: 'bigint',
-  })
-  id: number;
-
-  @Column({
     type: 'int',
   })
-  districtId: number;
+  id: number;
 
   @Column({ name: 'name', type: 'varchar' })
   name: string;
 
-  @Column({ name: 'province_id', type: 'varchar' })
-  provinceId: number;
+  @Column({ name: 'province_id', type: 'int' })
+  province_id: number;
 
   @ManyToOne(() => Province, (province) => province.districts)
   @JoinColumn({ name: 'province_id' })

@@ -1,14 +1,11 @@
-import { Province as ProvinceEntity } from 'src/typeorm';
-import { District as DisctrictEntity } from 'src/typeorm';
-import { Ward as WardEntity } from 'src/typeorm';
+import { Province as ProvinceEntity } from 'src/entities/Province';
+import { District as DisctrictEntity } from 'src/entities/District';
+import { Ward as WardEntity } from 'src/entities/Ward';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Command, CommandArguments, _cli } from '@squareboat/nest-console';
 import * as XLSX from 'xlsx';
 import { Repository } from 'typeorm';
-import { ProvinceType } from 'src/export-unit-administrative/types/Province';
-import { DistrictType } from 'src/export-unit-administrative/types/District';
-import { WardType } from 'src/export-unit-administrative/types/Ward';
 
 @Injectable()
 export class ExportUnitAdministrativeService {
@@ -26,9 +23,9 @@ export class ExportUnitAdministrativeService {
     args: {},
   })
   async runCli(args: CommandArguments) {
-    const listProvince: ProvinceType[] = [];
-    const listDistrict: DistrictType[] = [];
-    const listWard: WardType[] = [];
+    const listProvince = [];
+    const listDistrict = [];
+    const listWard = [];
     _cli.info(`Hello ${args.name || 'world'}!`);
     const dataUnitAdministrative = XLSX.readFile(
       'src/utils/unitAdministrative.xls',
@@ -36,34 +33,50 @@ export class ExportUnitAdministrativeService {
     const listRecords = XLSX.utils.sheet_to_json(
       dataUnitAdministrative['Sheet1'],
     );
+    // resolve province
     for (const record of listRecords) {
       const isExistedProvince = listProvince.some(
-        (province) => Number(province.id) === Number(record['Mã TP']),
+        (province) => province.name === record['Tỉnh Thành Phố'],
       );
       if (!isExistedProvince) {
         listProvince.push({
           name: record['Tỉnh Thành Phố'],
-          id: Number(record['Mã TP']),
         });
       }
-      const isExistedDistrict = listDistrict.some(
-        (district) => Number(district.id) === Number(record['Mã QH']),
-      );
-      if (!isExistedDistrict) {
-        listDistrict.push({
-          name: record['Quận Huyện'],
-          id: Number(record['Mã QH']),
-          provinceId: Number(record['Mã TP']),
-        });
-      }
-      listWard.push({
-        name: record['Phường Xã'],
-        id: Number(record['Mã PX']),
-        districtId: Number(record['Mã QH']),
-      });
     }
-    console.log('listWard', listWard);
-    // await this.WardRepository.insert(listWard);
+    await this.ProvinceRepository.insert(listProvince);
+
+    // resolve district
+    const listProvinceFromDB = await this.ProvinceRepository.find();
+    for (const record of listRecords) {
+      for (const province of listProvinceFromDB) {
+        if (province.name === record['Tỉnh Thành Phố']) {
+          const isExistedDistrict = listDistrict.some(
+            (district) => district.name === record['Quận Huyện'],
+          );
+          if (!isExistedDistrict) {
+            listDistrict.push({
+              name: record['Quận Huyện'],
+              province_id: province.id,
+            });
+          }
+        }
+      }
+    }
+    await this.DistrictRepository.insert(listDistrict);
+    // resolve ward
+    const listDistrictFromDB = await this.DistrictRepository.find();
+    for (const record of listRecords) {
+      for (const district of listDistrictFromDB) {
+        if (district.name === record['Quận Huyện']) {
+          listWard.push({
+            name: record['Phường Xã'] || 'Undefined data',
+            district_id: district.id,
+          });
+        }
+      }
+    }
+    await this.WardRepository.insert(listWard);
     return;
   }
 }
