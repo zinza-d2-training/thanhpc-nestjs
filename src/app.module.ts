@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
+import { ConsoleModule } from '@squareboat/nest-console';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
+import { ExportUnitAdministrativeModule } from './export-unit-administrative/export-unit-administrative.module';
 import entities from './typeorm';
 
 @Module({
@@ -17,7 +20,9 @@ import entities from './typeorm';
       entities: entities,
       synchronize: true,
     }),
+    ConsoleModule,
     UserModule,
+    ExportUnitAdministrativeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
