@@ -1,7 +1,7 @@
 export interface DistrictType {
-  id: number;
+  district_id: number;
+  province_id: number;
   name: string;
-  provinceId: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -14,14 +14,16 @@ import { Ward } from './Ward';
 @Entity('districts')
 export class District {
   @PrimaryGeneratedColumn({
-    type: 'bigint',
+    type: 'int',
   })
   id: number;
 
   @Column({
+    nullable: false,
+    name: 'district_id',
     type: 'int',
   })
-  districtId: number;
+  district_id: number;
 
   @Column({ name: 'name', type: 'varchar' })
   name: string;

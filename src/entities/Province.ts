@@ -16,9 +16,11 @@ export class Province {
   id: number;
 
   @Column({
+    nullable: false,
+    name: 'province_id',
     type: 'int',
   })
-  provinceId: number;
+  province_id: number;
 
   @Column({
     nullable: false,

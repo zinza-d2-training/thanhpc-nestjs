@@ -17,9 +17,11 @@ export class Ward {
   id: number;
 
   @Column({
+    nullable: false,
+    name: 'ward_id',
     type: 'int',
   })
-  wardId: number;
+  ward_id: number;
 
   @Column({ name: 'name', type: 'varchar' })
   name: string;

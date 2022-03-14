@@ -1,6 +1,6 @@
-import { Province as ProvinceEntity } from 'src/typeorm';
-import { District as DisctrictEntity } from 'src/typeorm';
-import { Ward as WardEntity } from 'src/typeorm';
+import { Province as ProvinceEntity } from 'src/entities/Province';
+import { District as DisctrictEntity } from 'src/entities/District';
+import { Ward as WardEntity } from 'src/entities/Ward';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Command, CommandArguments, _cli } from '@squareboat/nest-console';
@@ -38,32 +38,36 @@ export class ExportUnitAdministrativeService {
     );
     for (const record of listRecords) {
       const isExistedProvince = listProvince.some(
-        (province) => Number(province.id) === Number(record['Mã TP']),
+        (province) => Number(province.province_id) === Number(record['Mã TP']),
       );
       if (!isExistedProvince) {
         listProvince.push({
           name: record['Tỉnh Thành Phố'],
-          id: Number(record['Mã TP']),
+          province_id: Number(record['Mã TP']),
         });
       }
       const isExistedDistrict = listDistrict.some(
-        (district) => Number(district.id) === Number(record['Mã QH']),
+        (district) => Number(district.district_id) === Number(record['Mã QH']),
       );
       if (!isExistedDistrict) {
         listDistrict.push({
+          district_id: Number(record['Mã QH']),
+          province_id: Number(record['Mã TP']),
           name: record['Quận Huyện'],
-          id: Number(record['Mã QH']),
-          provinceId: Number(record['Mã TP']),
         });
       }
       listWard.push({
+        ward_id: Number(record['Mã PX']),
+        district_id: Number(record['Mã QH']),
         name: record['Phường Xã'],
-        id: Number(record['Mã PX']),
-        districtId: Number(record['Mã QH']),
       });
     }
-    console.log('listWard', listWard);
-    // await this.WardRepository.insert(listWard);
+    // console.log('listProvince', listProvince);
+    // console.log('listDistrict', listDistrict);
+    // console.log('listWard', listWard);
+    // await this.ProvinceRepository.insert(listProvince);
+    await this.DistrictRepository.insert(listDistrict);
+    await this.WardRepository.insert(listWard);
     return;
   }
 }
