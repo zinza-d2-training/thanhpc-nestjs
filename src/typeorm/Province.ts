@@ -27,6 +27,9 @@ export class Province {
   })
   name: string;
 
+  @OneToMany(() => District, (district) => district.province)
+  districts: District[];
+
   @CreateDateColumn({
     nullable: true,
     name: 'created_at',
@@ -40,7 +43,4 @@ export class Province {
     type: 'timestamp',
   })
   updatedAt: Date;
-
-  @OneToMany(() => District, (district) => district.province)
-  districts: District[];
 }

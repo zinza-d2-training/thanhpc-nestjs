@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
 import { ExportUnitAdministrativeModule } from './export-unit-administrative/export-unit-administrative.module';
 import entities from './typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -23,6 +24,9 @@ import entities from './typeorm';
     ConsoleModule,
     UserModule,
     ExportUnitAdministrativeModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env.example',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
