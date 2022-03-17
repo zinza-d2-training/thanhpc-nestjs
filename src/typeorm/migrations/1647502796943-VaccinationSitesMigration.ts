@@ -1,10 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class WardsMigration1647255273188 implements MigrationInterface {
+export class VaccinationSitesMigration1647502796943
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'wards',
+        name: 'vaccination_sites',
         columns: [
           {
             name: 'id',
@@ -20,7 +22,22 @@ export class WardsMigration1647255273188 implements MigrationInterface {
             length: '255',
           },
           {
-            name: 'district_id',
+            name: 'street_name',
+            type: 'varchar',
+            length: '255',
+          },
+          {
+            name: 'ward_id',
+            type: 'int',
+            length: '11',
+          },
+          {
+            name: 'site_manager_id',
+            type: 'int',
+            length: '11',
+          },
+          {
+            name: 'number_of_vaccination_table',
             type: 'int',
             length: '11',
           },
@@ -39,11 +56,18 @@ export class WardsMigration1647255273188 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            columnNames: ['district_id'],
+            columnNames: ['ward_id'],
             referencedColumnNames: ['id'],
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
-            referencedTableName: 'districts',
+            referencedTableName: 'wards',
+          },
+          {
+            columnNames: ['site_manager_id'],
+            referencedColumnNames: ['id'],
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
+            referencedTableName: 'users',
           },
         ],
       }),
@@ -52,7 +76,6 @@ export class WardsMigration1647255273188 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('wards');
+    await queryRunner.dropTable('vaccination_sites');
   }
 }
-// Site manager	Number of vaccination table ??

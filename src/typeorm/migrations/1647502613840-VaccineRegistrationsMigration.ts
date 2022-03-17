@@ -1,10 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class WardsMigration1647255273188 implements MigrationInterface {
+export class VaccineRegistrationsMigration1647502613840
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'wards',
+        name: 'vaccine_registrations',
         columns: [
           {
             name: 'id',
@@ -15,15 +17,16 @@ export class WardsMigration1647255273188 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'name',
-            type: 'varchar',
-            length: '255',
-          },
-          {
-            name: 'district_id',
+            name: 'personal_info_id',
             type: 'int',
             length: '11',
           },
+          {
+            name: 'medical_history_id',
+            type: 'int',
+            length: '11',
+          },
+          { name: 'status', type: 'varchar', length: '255' },
           {
             name: 'created_at',
             type: 'timestamp',
@@ -39,20 +42,25 @@ export class WardsMigration1647255273188 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            columnNames: ['district_id'],
+            columnNames: ['personal_info_id'],
             referencedColumnNames: ['id'],
+            referencedTableName: 'personal_informations',
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
-            referencedTableName: 'districts',
+          },
+          {
+            columnNames: ['medical_history_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'medical_history_responses',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
           },
         ],
       }),
-      true,
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('wards');
+    await queryRunner.dropTable('vaccine_registrations');
   }
 }
-// Site manager	Number of vaccination table ??

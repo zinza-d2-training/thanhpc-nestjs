@@ -1,10 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class WardsMigration1647255273188 implements MigrationInterface {
+export class MedicalHistoryResponsesMigration1647502202200
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'wards',
+        name: 'medical_history_responses',
         columns: [
           {
             name: 'id',
@@ -14,15 +16,13 @@ export class WardsMigration1647255273188 implements MigrationInterface {
             isGenerated: true,
             generationStrategy: 'increment',
           },
+          { name: 'prehistoric', type: 'varchar', length: '255' },
+          { name: 'symptom', type: 'varchar', length: '255', isNullable: true },
+          { name: 'is_symptom', type: 'tinyint', length: '1' },
           {
-            name: 'name',
+            name: 'status_injection_registration',
             type: 'varchar',
             length: '255',
-          },
-          {
-            name: 'district_id',
-            type: 'int',
-            length: '11',
           },
           {
             name: 'created_at',
@@ -37,22 +37,10 @@ export class WardsMigration1647255273188 implements MigrationInterface {
             default: 'CURRENT_TIMESTAMP',
           },
         ],
-        foreignKeys: [
-          {
-            columnNames: ['district_id'],
-            referencedColumnNames: ['id'],
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE',
-            referencedTableName: 'districts',
-          },
-        ],
       }),
-      true,
     );
   }
-
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('wards');
+    await queryRunner.dropTable('medical_history_responses');
   }
 }
-// Site manager	Number of vaccination table ??

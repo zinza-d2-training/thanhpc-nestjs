@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class WardsMigration1647255273188 implements MigrationInterface {
+export class CitizenImagesMigration1647500628164 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'wards',
+        name: 'citizen_images',
         columns: [
           {
             name: 'id',
@@ -15,14 +15,14 @@ export class WardsMigration1647255273188 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
+            name: 'file_id',
+            type: 'int',
+            length: '11',
+          },
+          {
             name: 'name',
             type: 'varchar',
             length: '255',
-          },
-          {
-            name: 'district_id',
-            type: 'int',
-            length: '11',
           },
           {
             name: 'created_at',
@@ -39,11 +39,11 @@ export class WardsMigration1647255273188 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            columnNames: ['district_id'],
+            columnNames: ['file_id'],
             referencedColumnNames: ['id'],
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
-            referencedTableName: 'districts',
+            referencedTableName: 'files',
           },
         ],
       }),
@@ -52,7 +52,6 @@ export class WardsMigration1647255273188 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('wards');
+    await queryRunner.dropTable('citizen_images');
   }
 }
-// Site manager	Number of vaccination table ??
