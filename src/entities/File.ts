@@ -14,6 +14,9 @@ export class File {
   })
   id: number;
 
+  @Column({ name: 'name', type: 'varchar' })
+  name: string;
+
   @Column({ name: 'path', type: 'varchar' })
   path: string;
 

@@ -16,6 +16,7 @@ import { Ward } from './Ward';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn({
+    name: 'id',
     type: 'int',
   })
   id: number;
@@ -29,12 +30,6 @@ export class User {
   @Column({ type: 'varchar' })
   @Exclude({ toPlainOnly: true })
   password: string;
-
-  @Column({
-    nullable: false,
-    name: 'citizen_image_id',
-  })
-  citizen_image_id: number;
 
   @Column({
     name: 'full_name',
@@ -68,13 +63,13 @@ export class User {
 
   @Column({
     name: 'injection_history_id',
-    nullable: false,
+    nullable: true,
   })
   injection_history_id: number;
 
   @Column({
     name: 'status_injection_registration',
-    nullable: false,
+    nullable: true,
   })
   status_injection_registration: string;
 

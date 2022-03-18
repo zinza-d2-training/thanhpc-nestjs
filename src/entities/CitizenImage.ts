@@ -16,13 +16,14 @@ export class CitizenImage {
   @PrimaryGeneratedColumn({ name: 'id', type: 'int' })
   id: number;
 
-  @Column({ name: 'file_id', type: 'varchar' })
-  file_id: string;
+  @Column({ name: 'file_id', type: 'int' })
+  file_id: number;
 
-  @Column({ name: 'name', type: 'varchar' })
-  name: string;
+  @Column({ name: 'user_id', type: 'int' })
+  user_id: number;
 
   @ManyToOne(() => User, (user) => user.citizenImages)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @OneToOne(() => File)

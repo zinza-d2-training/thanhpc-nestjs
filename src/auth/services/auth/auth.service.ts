@@ -1,23 +1,75 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from 'src/entities/User';
+import { File } from 'src/entities/File';
 import { Repository } from 'typeorm';
+import { RegisterDto } from 'src/auth/dto/RegisterDto';
+import { CitizenImage } from 'src/entities/CitizenImage';
+import { hashPassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(File)
+    private readonly fileRepository: Repository<File>,
+    @InjectRepository(CitizenImage)
+    private readonly citizenImageRepository: Repository<CitizenImage>,
   ) {}
-  login() {
+  async login() {
     console.log(this.userRepository.find());
     return 0;
   }
-  register() {
-    console.log('register');
-    return 0;
+  async register(files: Array<Express.Multer.File>, body: RegisterDto) {
+    const existedUser = await this.userRepository.findOne({
+      citizen_id: body.citizen_id,
+    });
+    console.log('existedUser', existedUser);
+    if (existedUser) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'CitizenId is already in use',
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+    console.log('body', body);
+    const password = hashPassword(body.password);
+    const userCreated = this.userRepository.create({
+      ...body,
+      role: 'default',
+      status_injection_registration: '',
+      password,
+    });
+    const userSaved = await this.userRepository.save(userCreated);
+    const filesSaved = await this.fileRepository
+      .createQueryBuilder()
+      .insert()
+      .values(
+        files.map((file) => ({
+          name: file.filename,
+          path: file.path,
+          mimetype: file.mimetype,
+        })),
+      )
+      .execute();
+    this.citizenImageRepository
+      .createQueryBuilder()
+      .insert()
+      .values(
+        filesSaved.identifiers.map(({ id }) => ({
+          file_id: id,
+          user_id: userSaved.id,
+        })),
+      )
+      .execute();
+    console.log('userSaved', userSaved);
+    console.log('files saved', filesSaved);
+    return;
   }
-  logout() {
+  async logout() {
     console.log('logout');
     return 0;
   }
