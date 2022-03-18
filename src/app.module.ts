@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
 import { ExportUnitAdministrativeModule } from './export-unit-administrative/export-unit-administrative.module';
 import { TypeormModule } from './typeorm/typeorm.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,6 +17,7 @@ import { TypeormModule } from './typeorm/typeorm.module';
     ConsoleModule,
     UserModule,
     ExportUnitAdministrativeModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

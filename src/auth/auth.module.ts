@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common';
+import { AuthController } from './controllers/auth/auth.controller';
+import { AuthService } from './services/auth/auth.service';
+import { File as FileEntity } from 'src/entities/File';
 import { CitizenImage } from 'src/entities/CitizenImage';
 import { InjectionHistory } from 'src/entities/InjectionHistory';
-import { User } from 'src/entities/User';
-import { File as FileEntity } from 'src/entities/File';
 import { Vaccine } from 'src/entities/Vaccine';
-import { UsersController } from './controllers/users.controller';
-import { UsersService } from './services/users.service';
+import { User } from 'src/entities/User';
 
 @Module({
   imports: [
@@ -18,12 +18,12 @@ import { UsersService } from './services/users.service';
       CitizenImage,
     ]),
   ],
-  controllers: [UsersController],
+  controllers: [AuthController],
   providers: [
     {
-      provide: 'USER_SERVICE',
-      useClass: UsersService,
+      provide: 'AUTH_SERVICE',
+      useClass: AuthService,
     },
   ],
 })
-export class UserModule {}
+export class AuthModule {}
