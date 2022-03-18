@@ -1,11 +1,13 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
+
 import { User } from 'src/entities/User';
 import { File } from 'src/entities/File';
 import { Repository } from 'typeorm';
 import { RegisterDto } from 'src/auth/dto/RegisterDto';
 import { CitizenImage } from 'src/entities/CitizenImage';
-import { hashPassword } from 'src/utils/bcrypt';
+import { hashPassword } from 'src/utils/HashPassword';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +19,14 @@ export class AuthService {
     @InjectRepository(CitizenImage)
     private readonly citizenImageRepository: Repository<CitizenImage>,
   ) {}
+  async validateUser(citizen_id: string, password: string) {
+    const user = await this.userRepository.findOne({ citizen_id });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (user && isMatch) {
+      return user;
+    }
+    return null;
+  }
   async login() {
     console.log(this.userRepository.find());
     return 0;
@@ -36,7 +46,7 @@ export class AuthService {
       );
     }
     console.log('body', body);
-    const password = hashPassword(body.password);
+    const { password } = hashPassword(body.password);
     const userCreated = this.userRepository.create({
       ...body,
       role: 'default',

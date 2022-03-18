@@ -2,7 +2,6 @@ import { extname } from 'path';
 
 export const imageFileFilter = (req, file, callback) => {
   if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
-    console.log('co loi');
     return callback(new Error('Only image files are allowed!'), false);
   }
   callback(null, true);

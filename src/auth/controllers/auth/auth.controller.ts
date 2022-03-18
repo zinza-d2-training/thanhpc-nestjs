@@ -4,24 +4,33 @@ import {
   Inject,
   Post,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { RegisterDto } from 'src/auth/dto/RegisterDto';
 import { AuthService } from 'src/auth/services/auth/auth.service';
 import { editFileName, imageFileFilter } from 'src/utils/uploadMultipleImage';
+import { JwtService } from '@nestjs/jwt';
+import { GetUser } from 'src/utils/GetUser';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject('AUTH_SERVICE') private readonly authService: AuthService,
+    private jwtService: JwtService,
   ) {}
+  @UseGuards(AuthGuard('local'))
   @Post('/login')
-  async login() {
-    console.log('login ok');
-    return await this.authService.login();
+  async login(@GetUser() user) {
+    console.log(user);
+    const payload = { citizen_id: user.citizen_id, id: user.id };
+    const accessToken = this.jwtService.sign(payload);
+    return { accessToken };
   }
+
   @Post('/register')
   @UseInterceptors(
     FilesInterceptor('files', 2, {
