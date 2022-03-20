@@ -11,12 +11,11 @@ import { District } from './District';
 @Entity('provinces')
 export class Province {
   @PrimaryGeneratedColumn({
-    type: 'bigint',
+    type: 'int',
   })
   id: number;
 
   @Column({
-    nullable: false,
     name: 'name',
     type: 'varchar',
   })
