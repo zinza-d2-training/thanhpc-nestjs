@@ -1,5 +1,5 @@
 export interface WardType {
-  ward_id: number;
+  id: number;
   district_id: number;
   name: string;
   createdAt?: Date;
