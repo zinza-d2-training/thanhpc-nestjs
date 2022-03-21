@@ -12,7 +12,7 @@ import { District } from './District';
 @Entity('wards')
 export class Ward {
   @PrimaryGeneratedColumn({
-    type: 'bigint',
+    type: 'int',
   })
   id: number;
 
