@@ -19,5 +19,8 @@ export class RenameColumnInMedicalHistoryResponsesTable1647838422530
     await queryRunner.query(
       'ALTER TABLE medical_history_responses MODIFY COLUMN injection_registration_status varchar(255)',
     );
+    await queryRunner.query(
+      'ALTER TABLE "medical_history_responses" MODIFY COLUMN "injection_registration_status" varchar(255)',
+    );
   }
 }
