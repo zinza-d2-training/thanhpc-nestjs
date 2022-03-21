@@ -55,4 +55,3 @@ export class WardsMigration1647255273188 implements MigrationInterface {
     await queryRunner.dropTable('wards');
   }
 }
-// Site manager	Number of vaccination table ??
