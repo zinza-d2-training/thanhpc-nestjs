@@ -19,7 +19,7 @@ export class CreateUserDto {
   dob: Date;
 
   @IsNotEmpty()
-  gender: string;
+  gender: number;
 
   @IsNotEmpty()
   phone_number: string;

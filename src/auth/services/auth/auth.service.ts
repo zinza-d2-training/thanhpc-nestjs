@@ -27,15 +27,10 @@ export class AuthService {
     }
     return null;
   }
-  async login() {
-    console.log(this.userRepository.find());
-    return 0;
-  }
   async register(files: Array<Express.Multer.File>, body: RegisterDto) {
     const existedUser = await this.userRepository.findOne({
       citizen_id: body.citizen_id,
     });
-    console.log('existedUser', existedUser);
     if (existedUser) {
       throw new HttpException(
         {
@@ -45,12 +40,10 @@ export class AuthService {
         HttpStatus.FORBIDDEN,
       );
     }
-    console.log('body', body);
-    const { password } = hashPassword(body.password);
+    const password = hashPassword(body.password);
     const userCreated = this.userRepository.create({
       ...body,
       role: 'default',
-      status_injection_registration: '',
       password,
     });
     const userSaved = await this.userRepository.save(userCreated);
@@ -75,8 +68,6 @@ export class AuthService {
         })),
       )
       .execute();
-    console.log('userSaved', userSaved);
-    console.log('files saved', filesSaved);
     return;
   }
   async logout() {

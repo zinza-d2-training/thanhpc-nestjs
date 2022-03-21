@@ -18,8 +18,11 @@ export class InjectionHistory {
   })
   id: number;
 
-  @Column({ name: 'injected_vaccine_name_id', type: 'int' })
-  injected_vaccine_name_id: number;
+  @Column({ name: 'injected_vaccine_id', type: 'int' })
+  injected_vaccine_id: number;
+
+  @Column({ name: 'injected_vaccine_id', type: 'int' })
+  user_id: number;
 
   @Column({ name: 'injected_vaccine_day', type: 'timestamp' })
   injected_vaccine_day: Date;
@@ -34,7 +37,7 @@ export class InjectionHistory {
   user: User;
 
   @OneToOne(() => Vaccine)
-  @JoinColumn({ name: 'injected_vaccine_name_id' })
+  @JoinColumn({ name: 'injected_vaccine_id' })
   vaccine: Vaccine;
 
   @CreateDateColumn({

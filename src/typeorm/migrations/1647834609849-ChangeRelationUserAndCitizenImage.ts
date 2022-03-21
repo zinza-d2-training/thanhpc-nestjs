@@ -34,7 +34,6 @@ export class ChangeRelationUserAndCitizenImage1647834609849
     );
     await queryRunner.dropForeignKey('users', foreignKey);
     await queryRunner.dropColumn('users', 'citizen_image_id');
-    await queryRunner.dropColumn('citizen_images', 'name');
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
@@ -71,14 +70,6 @@ export class ChangeRelationUserAndCitizenImage1647834609849
         referencedTableName: 'citizen_images',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-      }),
-    );
-    await queryRunner.addColumn(
-      'citizen_images',
-      new TableColumn({
-        name: 'name',
-        type: 'varchar',
-        length: '255',
       }),
     );
   }
