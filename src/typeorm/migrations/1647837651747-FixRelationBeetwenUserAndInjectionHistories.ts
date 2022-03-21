@@ -43,5 +43,24 @@ export class FixRelationBeetwenUserAndInjectionHistories1647837651747
     );
     await queryRunner.dropForeignKey('injection_histories', foreignKey);
     await queryRunner.dropColumn('injection_histories', 'user_id');
+
+    await queryRunner.addColumn(
+      'users',
+      new TableColumn({
+        name: 'injection_history_id',
+        type: 'int',
+        length: '11',
+      }),
+    );
+    await queryRunner.createForeignKey(
+      'users',
+      new TableForeignKey({
+        columnNames: ['injection_history_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'injection_histories',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 }
