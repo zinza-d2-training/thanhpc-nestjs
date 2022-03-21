@@ -21,7 +21,7 @@ import { MulterModule } from '@nestjs/platform-express';
     ExportUnitAdministrativeModule,
     AuthModule,
     MulterModule.register({
-      dest: './files',
+      dest: './dist/files',
     }),
   ],
   controllers: [AppController],
