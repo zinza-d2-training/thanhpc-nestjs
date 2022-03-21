@@ -19,7 +19,7 @@ export class ExportUnitAdministrativeService {
   ) {}
   // run command: node cli export
   @Command('export', {
-    desc: 'Test Command',
+    desc: 'Export data from excel to mysql server',
     args: {},
   })
   async runCli(args: CommandArguments) {

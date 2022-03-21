@@ -32,8 +32,15 @@ export class District {
   wards: Ward[];
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+<<<<<<< HEAD
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Date;
+=======
+  created_at: Date;
+
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  updated_at: Date;
+>>>>>>> 92390bfe415f30a9fb3427dac03b5be7fcae5269
 }

@@ -11,12 +11,11 @@ import { District } from './District';
 @Entity('provinces')
 export class Province {
   @PrimaryGeneratedColumn({
-    type: 'bigint',
+    type: 'int',
   })
   id: number;
 
   @Column({
-    nullable: false,
     name: 'name',
     type: 'varchar',
   })
@@ -30,12 +29,12 @@ export class Province {
     name: 'created_at',
     type: 'timestamp',
   })
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn({
     nullable: true,
     name: 'updated_at',
     type: 'timestamp',
   })
-  updatedAt: Date;
+  updated_at: Date;
 }

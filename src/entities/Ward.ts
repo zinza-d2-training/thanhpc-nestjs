@@ -12,7 +12,7 @@ import { District } from './District';
 @Entity('wards')
 export class Ward {
   @PrimaryGeneratedColumn({
-    type: 'bigint',
+    type: 'int',
   })
   id: number;
 
@@ -27,8 +27,8 @@ export class Ward {
   district: District;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
-  updatedAt: Date;
+  updated_at: Date;
 }
