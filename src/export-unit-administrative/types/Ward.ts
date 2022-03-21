@@ -2,6 +2,6 @@ export interface WardType {
   id: number;
   district_id: number;
   name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
