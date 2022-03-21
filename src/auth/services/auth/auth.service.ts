@@ -80,7 +80,9 @@ export class AuthService {
     return;
   }
   async logout() {
-    console.log('logout');
-    return 0;
+    return {
+      status: 200,
+      message: 'User has been logged out',
+    };
   }
 }

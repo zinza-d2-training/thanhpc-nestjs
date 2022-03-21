@@ -49,7 +49,6 @@ export class AuthController {
   }
   @Post('/logout')
   async logout() {
-    console.log('logout ok');
     return await this.authService.logout();
   }
 }
