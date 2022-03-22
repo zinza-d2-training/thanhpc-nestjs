@@ -15,7 +15,9 @@ export class ChangeUsersTableMigration1647594019327
     );
     await queryRunner.dropForeignKey('users', foreignKey);
     await queryRunner.dropColumn('users', 'injection_history_id');
+  }
 
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
       'users',
       new TableColumn({
@@ -35,9 +37,5 @@ export class ChangeUsersTableMigration1647594019327
         onUpdate: 'CASCADE',
       }),
     );
-  }
-
-  public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('injection_histories');
   }
 }
