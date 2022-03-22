@@ -25,7 +25,6 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('/login')
   async login(@GetUser() user) {
-    console.log(user);
     const payload = { citizen_id: user.citizen_id, id: user.id };
     const accessToken = this.jwtService.sign(payload);
     return { accessToken };
