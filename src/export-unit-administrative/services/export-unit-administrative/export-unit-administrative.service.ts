@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Command, CommandArguments, _cli } from '@squareboat/nest-console';
 import * as XLSX from 'xlsx';
 import { Repository } from 'typeorm';
+import { DistributionUpdateDto } from 'src/export-unit-administrative/dto/distributionUpdateDto';
 
 @Injectable()
 export class ExportUnitAdministrativeService {
@@ -87,7 +88,7 @@ export class ExportUnitAdministrativeService {
       relations: ['districts', 'districts.wards'],
     });
   }
-  async distributionUpdate(body) {
+  async distributionUpdate(body: DistributionUpdateDto) {
     const { id } = body;
     await this.provinceRepository.update({ id }, body);
     return {
