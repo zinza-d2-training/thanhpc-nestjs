@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { RegisterDto } from 'src/auth/dto/RegisterDto';
 import { CitizenImage } from 'src/entities/CitizenImage';
 import { hashPassword } from 'src/utils/HashPassword';
+import { Role } from 'src/auth/types/constant';
 
 @Injectable()
 export class AuthService {
@@ -20,9 +21,11 @@ export class AuthService {
   ) {}
   async validateUser(citizen_id: string, password: string) {
     const user = await this.userRepository.findOne({ citizen_id });
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (user && isMatch) {
-      return user;
+    if (user) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        return user;
+      }
     }
     return null;
   }
@@ -42,7 +45,7 @@ export class AuthService {
     const password = hashPassword(body.password);
     const userCreated = this.userRepository.create({
       ...body,
-      role: 'default',
+      role: Role.Default,
       password,
     });
     const userSaved = await this.userRepository.save(userCreated);
