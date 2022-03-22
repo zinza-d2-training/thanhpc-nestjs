@@ -44,6 +44,7 @@ export class AuthController {
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Body() body: RegisterDto,
   ) {
+    console.log(body);
     return await this.authService.register(files, body);
   }
   @Post('/logout')

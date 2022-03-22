@@ -10,6 +10,8 @@ import { Vaccine } from 'src/entities/Vaccine';
 import { User } from 'src/entities/User';
 import { LocalStrategy } from 'src/utils/LocalStragy';
 import { JwtModule } from '@nestjs/jwt';
+import { Ward } from 'src/entities/Ward';
+import { IsExistedWardValidator } from './dto/rules/CheckWardExistRule';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { JwtModule } from '@nestjs/jwt';
       InjectionHistory,
       Vaccine,
       CitizenImage,
+      Ward,
     ]),
     PassportModule,
     JwtModule.register({
@@ -35,6 +38,7 @@ import { JwtModule } from '@nestjs/jwt';
       useClass: AuthService,
     },
     LocalStrategy,
+    IsExistedWardValidator,
   ],
 })
 export class AuthModule {}
