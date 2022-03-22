@@ -43,6 +43,7 @@ export class AuthService {
       );
     }
     const password = hashPassword(body.password);
+    console.log('body', body);
     const userCreated = this.userRepository.create({
       ...body,
       role: Role.Default,
