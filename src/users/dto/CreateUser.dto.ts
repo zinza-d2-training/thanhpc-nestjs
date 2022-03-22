@@ -26,10 +26,4 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   ward_id: number;
-
-  @IsNotEmpty()
-  injection_history_id: number;
-
-  @IsNotEmpty()
-  status_injection_registration: string;
 }
