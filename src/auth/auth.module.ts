@@ -1,7 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-
 import { AuthController } from './controllers/auth/auth.controller';
 import { AuthService } from './services/auth/auth.service';
 import { File as FileEntity } from 'src/entities/File';

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConsoleModule } from '@squareboat/nest-console';
 import { ConfigModule } from '@nestjs/config';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
