@@ -11,11 +11,11 @@ import { Repository } from 'typeorm';
 export class ExportUnitAdministrativeService {
   constructor(
     @InjectRepository(ProvinceEntity)
-    private readonly ProvinceRepository: Repository<ProvinceEntity>,
+    private readonly provinceRepository: Repository<ProvinceEntity>,
     @InjectRepository(DisctrictEntity)
-    private readonly DistrictRepository: Repository<DisctrictEntity>,
+    private readonly districtRepository: Repository<DisctrictEntity>,
     @InjectRepository(WardEntity)
-    private readonly WardRepository: Repository<WardEntity>,
+    private readonly wardRepository: Repository<WardEntity>,
   ) {}
   // run command: node cli export
   @Command('export', {
@@ -44,10 +44,10 @@ export class ExportUnitAdministrativeService {
         });
       }
     }
-    await this.ProvinceRepository.insert(listProvince);
+    await this.provinceRepository.insert(listProvince);
 
     // resolve district
-    const listProvinceFromDB = await this.ProvinceRepository.find();
+    const listProvinceFromDB = await this.provinceRepository.find();
     for (const record of listRecords) {
       for (const province of listProvinceFromDB) {
         if (province.name === record['Tỉnh Thành Phố']) {
@@ -63,9 +63,9 @@ export class ExportUnitAdministrativeService {
         }
       }
     }
-    await this.DistrictRepository.insert(listDistrict);
+    await this.districtRepository.insert(listDistrict);
     // resolve ward
-    const listDistrictFromDB = await this.DistrictRepository.find();
+    const listDistrictFromDB = await this.districtRepository.find();
     for (const record of listRecords) {
       for (const district of listDistrictFromDB) {
         if (district.name === record['Quận Huyện']) {
@@ -76,7 +76,23 @@ export class ExportUnitAdministrativeService {
         }
       }
     }
-    await this.WardRepository.insert(listWard);
+    await this.wardRepository.insert(listWard);
     return;
+  }
+  // getUsers(): Promise<UserEntity[]> {
+  //   return this.userRepository.find();
+  // }
+  async getUnitAdministrative() {
+    return await this.provinceRepository.find({
+      relations: ['districts', 'districts.wards'],
+    });
+  }
+  async distributionUpdate(body) {
+    const { id } = body;
+    await this.provinceRepository.update({ id }, body);
+    return {
+      status: 200,
+      message: 'Cập nhật thành công!',
+    };
   }
 }

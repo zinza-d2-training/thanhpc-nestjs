@@ -21,7 +21,7 @@ export class InjectionHistory {
   @Column({ name: 'injected_vaccine_id', type: 'int' })
   injected_vaccine_id: number;
 
-  @Column({ name: 'injected_vaccine_id', type: 'int' })
+  @Column({ name: 'user_id', type: 'int' })
   user_id: number;
 
   @Column({ name: 'injected_vaccine_day', type: 'timestamp' })

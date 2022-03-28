@@ -21,6 +21,18 @@ export class Province {
   })
   name: string;
 
+  @Column({ name: 'adult_population', type: 'int' })
+  adult_population: number;
+
+  @Column({ name: 'distribution_plan', type: 'int' })
+  distribution_plan: number;
+
+  @Column({ name: 'actual_distribution', type: 'int' })
+  actual_distribution: number;
+
+  @Column({ name: 'injected_number', type: 'int' })
+  injected_number: number;
+
   @OneToMany(() => District, (district) => district.province)
   districts: District[];
 
