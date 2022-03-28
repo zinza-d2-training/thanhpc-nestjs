@@ -43,10 +43,9 @@ export class AuthService {
       );
     }
     const password = hashPassword(body.password);
-    console.log('body', body);
     const userCreated = this.userRepository.create({
       ...body,
-      role: Role.Default,
+      role: Role.User,
       password,
     });
     const userSaved = await this.userRepository.save(userCreated);
@@ -71,7 +70,10 @@ export class AuthService {
         })),
       )
       .execute();
-    return;
+    return {
+      status: 200,
+      message: 'Đăng ký thành công!',
+    };
   }
   async logout() {
     return {

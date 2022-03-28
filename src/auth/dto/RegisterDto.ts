@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsString, MinLength, Validate } from 'class-validator';
-// import { IsUserAlreadyExist } from './rules/CheckWardExistRule';
 import { CitizenIdRule } from './rules/CitizenIdRule';
 import { PhoneNumberRule } from './rules/PhoneNumberRule';
 
