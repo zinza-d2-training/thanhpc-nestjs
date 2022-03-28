@@ -31,9 +31,17 @@ export class District {
   @OneToMany(() => Ward, (ward) => ward.district)
   wards: Ward[];
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @CreateDateColumn({
+    nullable: true,
+    name: 'created_at',
+    type: 'timestamp',
+  })
   created_at: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({
+    nullable: true,
+    name: 'updated_at',
+    type: 'timestamp',
+  })
   updated_at: Date;
 }

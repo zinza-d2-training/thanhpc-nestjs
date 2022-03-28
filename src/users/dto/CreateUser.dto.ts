@@ -2,24 +2,28 @@ import { IsNotEmpty, MinLength } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
+  citizen_id: string;
+  @IsNotEmpty()
+  role: string;
+  @IsNotEmpty()
   @MinLength(8)
   password: string;
 
   @IsNotEmpty()
-  address: string;
+  citizen_image_id: number;
+
+  @IsNotEmpty()
+  full_name: string;
 
   @IsNotEmpty()
   dob: Date;
 
   @IsNotEmpty()
-  citizenId: string;
+  gender: number;
 
   @IsNotEmpty()
   phone_number: string;
 
   @IsNotEmpty()
-  gender: number;
-
-  @IsNotEmpty()
-  full_name: string;
+  ward_id: number;
 }

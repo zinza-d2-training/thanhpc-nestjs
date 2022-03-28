@@ -2,29 +2,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { District } from './District';
 
-@Entity('wards')
-export class Ward {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
+@Entity('vaccines')
+export class Vaccine {
+  @PrimaryGeneratedColumn({ name: 'id', type: 'int' })
   id: number;
 
   @Column({ name: 'name', type: 'varchar' })
   name: string;
-
-  @Column({ name: 'district_id', type: 'int' })
-  district_id: number;
-
-  @ManyToOne(() => District, (district) => district.wards)
-  @JoinColumn({ name: 'district_id' })
-  district: District;
 
   @CreateDateColumn({
     nullable: true,

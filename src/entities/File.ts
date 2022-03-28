@@ -2,16 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { District } from './District';
 
-@Entity('wards')
-export class Ward {
+@Entity('files')
+export class File {
   @PrimaryGeneratedColumn({
+    name: 'id',
     type: 'int',
   })
   id: number;
@@ -19,12 +17,11 @@ export class Ward {
   @Column({ name: 'name', type: 'varchar' })
   name: string;
 
-  @Column({ name: 'district_id', type: 'int' })
-  district_id: number;
+  @Column({ name: 'path', type: 'varchar' })
+  path: string;
 
-  @ManyToOne(() => District, (district) => district.wards)
-  @JoinColumn({ name: 'district_id' })
-  district: District;
+  @Column({ name: 'mimetype', type: 'varchar' })
+  mimetype: string;
 
   @CreateDateColumn({
     nullable: true,
