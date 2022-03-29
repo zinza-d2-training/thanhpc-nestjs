@@ -1,5 +1,5 @@
 import { ExportUnitAdministrativeService } from './../../services/export-unit-administrative/export-unit-administrative.service';
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Put } from '@nestjs/common';
 import { DistributionUpdateDto } from 'src/export-unit-administrative/dto/distributionUpdateDto';
 
 @Controller('export-unit-administrative')
@@ -12,7 +12,7 @@ export class ExportUnitAdministrativeController {
   async getUnitAdministrative() {
     return await this.exportUnitAdministrativeService.getUnitAdministrative();
   }
-  @Post('distribution-update')
+  @Put('distribution-update')
   async distributionUpdate(@Body() body: DistributionUpdateDto) {
     return await this.exportUnitAdministrativeService.distributionUpdate(body);
   }
