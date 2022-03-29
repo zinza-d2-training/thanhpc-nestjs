@@ -80,9 +80,6 @@ export class ExportUnitAdministrativeService {
     await this.wardRepository.insert(listWard);
     return;
   }
-  // getUsers(): Promise<UserEntity[]> {
-  //   return this.userRepository.find();
-  // }
   async getUnitAdministrative() {
     return await this.provinceRepository.find({
       relations: ['districts', 'districts.wards'],
