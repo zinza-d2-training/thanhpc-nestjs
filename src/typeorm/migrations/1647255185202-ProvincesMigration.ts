@@ -20,6 +20,24 @@ export class ProvincesMigration1647255185202 implements MigrationInterface {
             length: '255',
           },
           {
+            name: 'adult_population',
+            type: 'int',
+            length: '11',
+            isNullable: true,
+          },
+          {
+            name: 'distribution_plan',
+            type: 'int',
+            length: '11',
+            isNullable: true,
+          },
+          {
+            name: 'actual_distribution',
+            type: 'int',
+            length: '11',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             isNullable: true,

@@ -27,13 +27,6 @@ export class FixRelationBeetwenUserAndInjectionHistories1647837651747
         onUpdate: 'CASCADE',
       }),
     );
-    // delete column injection_history_id
-    const table = await queryRunner.getTable('users');
-    const foreignKey = table.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf('injection_history_id') !== -1,
-    );
-    await queryRunner.dropForeignKey('users', foreignKey);
-    await queryRunner.dropColumn('users', 'injection_history_id');
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
