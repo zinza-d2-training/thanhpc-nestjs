@@ -8,6 +8,7 @@ import { ExportUnitAdministrativeModule } from './export-unit-administrative/exp
 import { TypeormModule } from './typeorm/typeorm.module';
 import { AuthModule } from './auth/auth.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { VaccinationSitesModule } from './vaccination-sites/vaccination-sites.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { MulterModule } from '@nestjs/platform-express';
     MulterModule.register({
       dest: './dist/files',
     }),
+    VaccinationSitesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
