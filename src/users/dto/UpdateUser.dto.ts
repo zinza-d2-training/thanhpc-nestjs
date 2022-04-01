@@ -1,15 +1,14 @@
-import { IsNotEmpty, MinLength } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
-export class CreateUserDto {
+export class UpdateUserDto {
+  @IsNotEmpty()
+  id: number;
+
   @IsNotEmpty()
   citizen_id: string;
 
   @IsNotEmpty()
   role: string;
-
-  @IsNotEmpty()
-  @MinLength(8)
-  password: string;
 
   @IsNotEmpty()
   full_name: string;

@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from 'src/users/dto/CreateUser.dto';
 
 import { Repository } from 'typeorm';
+import { UpdateUserDto } from '../dto/UpdateUser.dto';
 
 @Injectable()
 export class UsersService {
@@ -23,5 +24,13 @@ export class UsersService {
   }
   async deleteUserById(id: number): Promise<void> {
     await this.userRepository.delete(id);
+  }
+  async updateUser(body: UpdateUserDto) {
+    const { id } = body;
+    await this.userRepository.update({ id }, body);
+    return {
+      status: 200,
+      message: 'Cập nhật thành công!',
+    };
   }
 }

@@ -2,17 +2,20 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
   ParseIntPipe,
   Post,
+  Put,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { User } from 'src/entities/User';
 import { CreateUserDto } from 'src/users/dto/CreateUser.dto';
+import { UpdateUserDto } from '../dto/UpdateUser.dto';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
@@ -35,7 +38,13 @@ export class UsersController {
   async getUserById(@Param('id', ParseIntPipe) id: number) {
     return await this.userService.getUserById(id);
   }
+  @Delete('delete/:id')
   async deleteUserById(@Param('id', ParseIntPipe) id: number) {
     return this.userService.deleteUserById(id);
+  }
+  @Put('update')
+  async updateUser(@Body() body: UpdateUserDto) {
+    console.log('body', body);
+    return await this.userService.updateUser(body);
   }
 }
