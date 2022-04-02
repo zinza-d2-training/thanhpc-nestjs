@@ -11,16 +11,16 @@ import { Injection } from './Injection';
 import { PriorityGroup } from './PriorityGroup';
 import { Ward } from './Ward';
 
-@Entity('personal_infomations')
-export class PersonalInfomation {
+@Entity('personal_informations')
+export class PersonalInformation {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'int',
   })
   id: number;
 
-  @Column({ name: 'injection_id', type: 'int', length: '255' })
-  injection_id: string;
+  @Column({ name: 'injection_id', type: 'int' })
+  injection_id: number;
 
   @OneToOne(() => Injection)
   @JoinColumn({ name: 'injection_id' })
@@ -28,7 +28,6 @@ export class PersonalInfomation {
 
   @Column({
     name: 'full_name',
-    nullable: true,
   })
   full_name: string;
 
@@ -49,7 +48,6 @@ export class PersonalInfomation {
 
   @Column({
     name: 'email',
-    nullable: true,
   })
   email: string;
 
@@ -60,25 +58,21 @@ export class PersonalInfomation {
 
   @Column({
     name: 'health_insurance_number',
-    nullable: true,
   })
   health_insurance_number: string;
 
   @Column({
     name: 'occupation',
-    nullable: true,
   })
   occupation: string;
 
   @Column({
     name: 'workplace',
-    nullable: true,
   })
   workplace: string;
 
   @Column({
     name: 'address',
-    nullable: true,
   })
   address: string;
 
@@ -93,13 +87,11 @@ export class PersonalInfomation {
 
   @Column({
     name: 'ethnic',
-    nullable: true,
   })
   ethnic: string;
 
   @Column({
     name: 'nationality',
-    nullable: true,
   })
   nationality: string;
 
@@ -118,19 +110,16 @@ export class PersonalInfomation {
 
   @Column({
     name: 'session_id',
-    nullable: true,
   })
   session_id: number;
 
   @CreateDateColumn({
-    nullable: true,
     name: 'created_at',
     type: 'timestamp',
   })
   created_at: Date;
 
   @UpdateDateColumn({
-    nullable: true,
     name: 'updated_at',
     type: 'timestamp',
   })

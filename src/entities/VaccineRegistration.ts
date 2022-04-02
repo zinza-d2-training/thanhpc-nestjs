@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { MedicalHistoryResponse } from './MedicalHistoryResponse';
-import { PersonalInfomation } from './PersonalInfomation';
+import { PersonalInformation } from './PersonalInformation';
 
 @Entity('vaccine_registrations')
 export class VaccineRegistration {
@@ -24,9 +24,9 @@ export class VaccineRegistration {
   })
   personal_info_id: number;
 
-  @OneToOne(() => PersonalInfomation)
+  @OneToOne(() => PersonalInformation)
   @JoinColumn({ name: 'personal_info_id' })
-  personalInfomation: PersonalInfomation;
+  personalInfomation: PersonalInformation;
 
   @Column({ name: 'status', type: 'varchar' })
   status: string;

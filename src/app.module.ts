@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { VaccinationSitesModule } from './vaccination-sites/vaccination-sites.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { PersonalInformationsModule } from './personal-informations/personal-informations.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
       dest: './dist/files',
     }),
     VaccinationSitesModule,
+    PersonalInformationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
