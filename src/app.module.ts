@@ -11,6 +11,9 @@ import { MulterModule } from '@nestjs/platform-express';
 import { VaccinationSitesModule } from './vaccination-sites/vaccination-sites.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { PersonalInformationsModule } from './personal-informations/personal-informations.module';
+import { VaccineRegistrationsModule } from './vaccine-registrations/vaccine-registrations.module';
+import { MedicalHistoryQuestionsModule } from './medical-history-questions/medical-history-questions.module';
+import { MedicalHistoryResponsesModule } from './medical-history-responses/medical-history-responses.module';
 
 @Module({
   imports: [
@@ -27,6 +30,9 @@ import { PersonalInformationsModule } from './personal-informations/personal-inf
     }),
     VaccinationSitesModule,
     PersonalInformationsModule,
+    VaccineRegistrationsModule,
+    MedicalHistoryQuestionsModule,
+    MedicalHistoryResponsesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
