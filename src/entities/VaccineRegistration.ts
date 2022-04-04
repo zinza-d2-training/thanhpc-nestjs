@@ -26,7 +26,11 @@ export class VaccineRegistration {
 
   @OneToOne(() => PersonalInformation)
   @JoinColumn({ name: 'personal_info_id' })
+<<<<<<< HEAD
   personalInformation: PersonalInformation;
+=======
+  personalInfomation: PersonalInformation;
+>>>>>>> 5915eb66ed8f09c524599441d04fa95a52dee828
 
   @Column({ name: 'status', type: 'varchar' })
   status: string;
@@ -50,4 +54,8 @@ export class VaccineRegistration {
     type: 'timestamp',
   })
   updated_at: Date;
+<<<<<<< HEAD
+=======
+  medicalHistoryResponse: any;
+>>>>>>> 5915eb66ed8f09c524599441d04fa95a52dee828
 }
