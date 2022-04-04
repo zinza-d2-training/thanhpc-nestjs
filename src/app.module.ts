@@ -12,6 +12,7 @@ import { VaccinationSitesModule } from './vaccination-sites/vaccination-sites.mo
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { PersonalInformationsModule } from './personal-informations/personal-informations.module';
 import { VaccineRegistrationsModule } from './vaccine-registrations/vaccine-registrations.module';
+import { MedicalHistoryQuestionsModule } from './medical-history-questions/medical-history-questions.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { VaccineRegistrationsModule } from './vaccine-registrations/vaccine-regi
     VaccinationSitesModule,
     PersonalInformationsModule,
     VaccineRegistrationsModule,
+    MedicalHistoryQuestionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
