@@ -37,7 +37,7 @@ export class AuthService {
       throw new HttpException(
         {
           status: HttpStatus.FORBIDDEN,
-          error: 'CitizenId is already in use',
+          error: 'Chứng minh nhân dân đã tồn tại!',
         },
         HttpStatus.FORBIDDEN,
       );
@@ -78,7 +78,7 @@ export class AuthService {
   async logout() {
     return {
       status: 200,
-      message: 'User has been logged out',
+      message: 'Logout thành công!',
     };
   }
 }
