@@ -13,6 +13,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 import { PersonalInformationsModule } from './personal-informations/personal-informations.module';
 import { VaccineRegistrationsModule } from './vaccine-registrations/vaccine-registrations.module';
 import { MedicalHistoryQuestionsModule } from './medical-history-questions/medical-history-questions.module';
+import { MedicalHistoryResponsesModule } from './medical-history-responses/medical-history-responses.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { MedicalHistoryQuestionsModule } from './medical-history-questions/medic
     PersonalInformationsModule,
     VaccineRegistrationsModule,
     MedicalHistoryQuestionsModule,
+    MedicalHistoryResponsesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
